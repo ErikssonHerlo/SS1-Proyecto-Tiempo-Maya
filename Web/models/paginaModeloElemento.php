@@ -8,10 +8,10 @@ session_start(); ?>
 $conn = include '../conexion/conexion.php';
 $tabla = $_GET['elemento'];
 $table =strtolower($tabla);
-$datos = $conn->query("SELECT nombre,significado,htmlCodigo FROM tiempo_maya." . $table . ";");
+$datos = $conn->query("SELECT nombre,imagen,significado,htmlCodigo FROM tiempo_maya." . $table . ";");
 $elementos = $datos;
 $informacion = $conn->query("SELECT htmlCodigo FROM tiempo_maya.pagina WHERE nombre='" . $tabla . "';");
-
+$imagen = "images";
 
 
 ?>
@@ -64,6 +64,7 @@ $informacion = $conn->query("SELECT htmlCodigo FROM tiempo_maya.pagina WHERE nom
                 </div>
                 <?php foreach($datos as $dato){
                    $stringPrint = "<h4 id='".$dato['nombre']."'>".$dato['nombre']."</h4>";
+                   $stringPrint.="<p><img id='$imagen' src=".$dato['imagen']."></p>";
                    $stringPrint.="<h5>Significado</h5> <p>".$dato['significado']."</p>";
                    $stringPrint.="<p>".$dato['htmlCodigo']."</p> <hr>";
                    echo $stringPrint;
